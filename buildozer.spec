@@ -9,7 +9,7 @@ source.exclude_dirs = bin, .buildozer, venv, __pycache__
 
 version = 1.0.0
 
-requirements = python3,kivy,kivymd,pillow,cryptography,pyjnius,android
+requirements = python3,kivy==2.3.0,kivymd==1.1.1,pillow,cryptography,pyjnius,android
 
 orientation = portrait
 fullscreen = 0
