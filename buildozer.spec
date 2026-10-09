@@ -4,18 +4,19 @@ package.name = licensegen
 package.domain = org.samir
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,ttf,json
+source.include_exts = py,png,jpg,kv,atlas,ttf,json,pem
 source.exclude_dirs = bin, .buildozer, venv, __pycache__
 
 version = 1.0.0
 
-requirements = python3,kivy==2.3.0,kivymd==1.1.1,pillow,cryptography,pyjnius,android
+# ⭐ تم إضافة openssl هنا وهو ضروري لبناء cryptography
+requirements = python3,kivy==2.3.0,kivymd==1.1.1,pillow,openssl,cryptography,pyjnius,android
 
 orientation = portrait
 fullscreen = 0
 
+# إذا لم تكن الصور موجودة، قم بوضع علامة # أمام السطرين التاليين
 icon.filename = %(source.dir)s/logo.png
-
 presplash.filename = %(source.dir)s/presplash.png
 
 android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,READ_MEDIA_IMAGES
