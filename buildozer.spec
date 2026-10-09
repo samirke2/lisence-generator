@@ -8,7 +8,7 @@ source.exclude_dirs = bin, .buildozer, venv, __pycache__, .git
 source.exclude_patterns = private_key.pem, *.keystore, last_license.txt
 version = 1.0.0
 
-icon.filename = %(source.dir)s/logo.png
+icon.filename = %(source.dir)s/icon.png
 presplash.filename = %(source.dir)s/presplash.png
 presplash.color = #020B1E
 
