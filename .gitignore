@@ -1,0 +1,10 @@
+private_key.pem
+*.keystore
+*.jks
+bin/
+.buildozer/
+__pycache__/
+*.pyc
+.venv/
+venv/
+last_license.txt
