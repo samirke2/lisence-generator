@@ -119,15 +119,16 @@ MDScreen:
     MDBoxLayout:
         orientation: "vertical"
 
+        # ============ Header ============
         MDBoxLayout:
             orientation: "vertical"
             size_hint_y: None
-            height: "80dp"
-            padding: "14dp", "10dp"
+            height: "68dp"
+            padding: "14dp", "8dp"
             md_bg_color: 0.08, 0.20, 0.45, 1
             MDLabel:
                 text: "License & Recovery Tool"
-                font_size: "20sp"
+                font_size: "18sp"
                 bold: True
                 color: 1, 1, 1, 1
                 halign: "center"
@@ -135,329 +136,322 @@ MDScreen:
                 text_size: self.width, None
             MDLabel:
                 text: "Samir Pyth_DZ  —  Admin Utility"
-                font_size: "11sp"
+                font_size: "10sp"
                 color: 1, 1, 1, 0.75
                 halign: "center"
                 valign: "middle"
                 size_hint_y: None
-                height: "16dp"
+                height: "14dp"
                 text_size: self.width, None
 
+        # ============ Tab switcher ============
         MDBoxLayout:
             orientation: "horizontal"
             size_hint_y: None
-            height: "54dp"
-            padding: "10dp", "6dp"
-            spacing: "8dp"
-            MDRaisedButton:
-                text: "Activation Code"
+            height: "46dp"
+            padding: "8dp", "4dp"
+            spacing: "6dp"
+            MDCard:
                 size_hint_x: 0.5
+                radius: [10]
+                elevation: 0
                 md_bg_color: app.tab_license_color
+                ripple_behavior: True
                 on_release: app.switch_tab("license")
-            MDRaisedButton:
-                text: "PIN Recovery"
+                MDLabel:
+                    text: "Activation Code"
+                    halign: "center"
+                    valign: "middle"
+                    bold: True
+                    font_size: "13sp"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+            MDCard:
                 size_hint_x: 0.5
+                radius: [10]
+                elevation: 0
                 md_bg_color: app.tab_recovery_color
+                ripple_behavior: True
                 on_release: app.switch_tab("recovery")
+                MDLabel:
+                    text: "PIN Recovery"
+                    halign: "center"
+                    valign: "middle"
+                    bold: True
+                    font_size: "13sp"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
 
+        # ============ Screens ============
         ScreenManager:
             id: tab_sm
             transition: NoTransition()
 
             MDScreen:
                 name: "license"
-                ScrollView:
-                    MDBoxLayout:
-                        orientation: "vertical"
-                        size_hint_y: None
-                        height: self.minimum_height
-                        padding: "16dp"
-                        spacing: "12dp"
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: "10dp"
+                    spacing: "6dp"
 
+                    # Key status + import button
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: "40dp"
+                        spacing: "6dp"
                         MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "110dp"
-                            padding: "12dp"
-                            spacing: "6dp"
-                            radius: [12]
-                            elevation: 1
+                            size_hint_x: 0.65
+                            radius: [10]
+                            elevation: 0
                             md_bg_color: app.key_status_color
+                            padding: "6dp", 0
                             MDLabel:
                                 text: app.key_status_text
                                 bold: True
-                                font_size: "13sp"
+                                font_size: "11sp"
                                 halign: "center"
                                 valign: "middle"
                                 theme_text_color: "Custom"
                                 text_color: 1, 1, 1, 1
-                                size_hint_y: None
-                                height: "32dp"
                                 text_size: self.width, None
-                            MDFlatButton:
-                                text: "Import Key (paste PEM)"
-                                theme_text_color: "Custom"
-                                text_color: 1, 1, 1, 1
-                                pos_hint: {"center_x": 0.5}
-                                on_release: app.import_key()
+                        MDFlatButton:
+                            text: "Import Key"
+                            size_hint_x: 0.35
+                            font_size: "12sp"
+                            theme_text_color: "Custom"
+                            text_color: 0.08, 0.45, 0.75, 1
+                            on_release: app.import_key()
 
-                        MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "200dp"
-                            padding: "14dp"
-                            spacing: "10dp"
-                            radius: [16]
-                            elevation: 2
-                            md_bg_color: 1, 1, 1, 1
-                            MDLabel:
-                                text: "Device ID"
-                                bold: True
-                                font_size: "15sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.08, 0.45, 0.75, 1
-                                size_hint_y: None
-                                height: "24dp"
-                            MDTextField:
-                                id: device_field
-                                mode: "rectangle"
-                                hint_text: "e.g. F08D87722C4B4DC3"
-                                icon_left: "identifier"
-                                font_size: "16sp"
-                                halign: "center"
-                            MDBoxLayout:
-                                orientation: "horizontal"
-                                size_hint_y: None
-                                height: "44dp"
-                                spacing: "8dp"
-                                MDFlatButton:
-                                    text: "Paste"
-                                    on_release: app.paste_device()
-                                MDFlatButton:
-                                    text: "Clear"
-                                    on_release: app.clear_device()
+                    # Device ID
+                    MDLabel:
+                        text: "Device ID"
+                        bold: True
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: "20dp"
+                        theme_text_color: "Custom"
+                        text_color: 0.08, 0.45, 0.75, 1
+                    MDTextField:
+                        id: device_field
+                        mode: "rectangle"
+                        hint_text: "e.g. F08D87722C4B4DC3"
+                        font_size: "14sp"
+                        size_hint_y: None
+                        height: "48dp"
+                        halign: "center"
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: "34dp"
+                        spacing: "6dp"
+                        MDFlatButton:
+                            text: "Paste"
+                            font_size: "12sp"
+                            on_release: app.paste_device()
+                        MDFlatButton:
+                            text: "Clear"
+                            font_size: "12sp"
+                            on_release: app.clear_device()
 
-                        MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "200dp"
-                            padding: "14dp"
-                            spacing: "10dp"
-                            radius: [16]
-                            elevation: 2
-                            md_bg_color: 1, 1, 1, 1
-                            MDLabel:
-                                text: "HW Fingerprint (recommended)"
-                                bold: True
-                                font_size: "15sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.55, 0.27, 0.68, 1
-                                size_hint_y: None
-                                height: "24dp"
-                            MDTextField:
-                                id: hwfp_field
-                                mode: "rectangle"
-                                hint_text: "e.g. 4A1B2C3D4E5F6789"
-                                icon_left: "fingerprint"
-                                font_size: "16sp"
-                                halign: "center"
-                            MDBoxLayout:
-                                orientation: "horizontal"
-                                size_hint_y: None
-                                height: "44dp"
-                                spacing: "8dp"
-                                MDFlatButton:
-                                    text: "Paste"
-                                    on_release: app.paste_hwfp()
-                                MDFlatButton:
-                                    text: "Clear"
-                                    on_release: app.clear_hwfp()
+                    # HW Fingerprint
+                    MDLabel:
+                        text: "HW Fingerprint (recommended)"
+                        bold: True
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: "20dp"
+                        theme_text_color: "Custom"
+                        text_color: 0.55, 0.27, 0.68, 1
+                    MDTextField:
+                        id: hwfp_field
+                        mode: "rectangle"
+                        hint_text: "e.g. 4A1B2C3D4E5F6789"
+                        font_size: "14sp"
+                        size_hint_y: None
+                        height: "48dp"
+                        halign: "center"
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: "34dp"
+                        spacing: "6dp"
+                        MDFlatButton:
+                            text: "Paste"
+                            font_size: "12sp"
+                            on_release: app.paste_hwfp()
+                        MDFlatButton:
+                            text: "Clear"
+                            font_size: "12sp"
+                            on_release: app.clear_hwfp()
 
+                    # Generate button
+                    MDRaisedButton:
+                        text: "Generate Activation Code"
+                        md_bg_color: 0.08, 0.45, 0.75, 1
+                        font_size: "14sp"
+                        size_hint_y: None
+                        height: "46dp"
+                        pos_hint: {"center_x": 0.5}
+                        on_release: app.generate()
+
+                    # Code output
+                    MDLabel:
+                        text: "Activation Code"
+                        bold: True
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: "20dp"
+                        theme_text_color: "Custom"
+                        text_color: 0.15, 0.55, 0.32, 1
+                    MDTextField:
+                        id: code_field
+                        mode: "rectangle"
+                        readonly: True
+                        multiline: True
+                        font_size: "10sp"
+                        size_hint_y: None
+                        height: "110dp"
+                        hint_text: "The code will appear here..."
+
+                    # Copy/Share
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: "42dp"
+                        spacing: "6dp"
                         MDRaisedButton:
-                            text: "Generate Activation Code"
-                            md_bg_color: 0.08, 0.45, 0.75, 1
-                            size_hint_y: None
-                            height: "56dp"
-                            pos_hint: {"center_x": 0.5}
-                            on_release: app.generate()
-
-                        MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "320dp"
-                            padding: "14dp"
-                            spacing: "10dp"
-                            radius: [16]
-                            elevation: 2
-                            md_bg_color: 1, 1, 1, 1
-                            MDLabel:
-                                text: "Activation Code"
-                                bold: True
-                                font_size: "15sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.15, 0.55, 0.32, 1
-                                size_hint_y: None
-                                height: "24dp"
-                            MDTextField:
-                                id: code_field
-                                mode: "rectangle"
-                                readonly: True
-                                multiline: True
-                                font_size: "11sp"
-                                size_hint_y: None
-                                height: "180dp"
-                                hint_text: "The code will appear here..."
-                            MDBoxLayout:
-                                orientation: "horizontal"
-                                size_hint_y: None
-                                height: "52dp"
-                                spacing: "8dp"
-                                MDRaisedButton:
-                                    text: "Copy"
-                                    md_bg_color: 0.15, 0.55, 0.32, 1
-                                    size_hint_x: 0.5
-                                    on_release: app.copy_license_code()
-                                MDRaisedButton:
-                                    text: "Share"
-                                    md_bg_color: 0.25, 0.65, 0.85, 1
-                                    size_hint_x: 0.5
-                                    on_release: app.share_license_code()
-
-                        Widget:
-                            size_hint_y: None
-                            height: "20dp"
+                            text: "Copy"
+                            md_bg_color: 0.15, 0.55, 0.32, 1
+                            font_size: "13sp"
+                            size_hint_x: 0.5
+                            on_release: app.copy_license_code()
+                        MDRaisedButton:
+                            text: "Share"
+                            md_bg_color: 0.25, 0.65, 0.85, 1
+                            font_size: "13sp"
+                            size_hint_x: 0.5
+                            on_release: app.share_license_code()
 
             MDScreen:
                 name: "recovery"
-                ScrollView:
-                    MDBoxLayout:
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: "10dp"
+                    spacing: "8dp"
+
+                    # Info card (compact)
+                    MDCard:
                         orientation: "vertical"
                         size_hint_y: None
-                        height: self.minimum_height
-                        padding: "16dp"
-                        spacing: "12dp"
-
-                        MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "180dp"
-                            padding: "14dp"
-                            spacing: "8dp"
-                            radius: [16]
-                            elevation: 1
-                            md_bg_color: 0.98, 0.95, 0.88, 1
-                            MDLabel:
-                                text: "What is this code?"
-                                bold: True
-                                font_size: "15sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.75, 0.22, 0.17, 1
-                                size_hint_y: None
-                                height: "24dp"
-                            MDLabel:
-                                text: "A recovery code lets a customer who forgot their PIN reset it without losing data. Give this code ONLY to the verified device owner. It works one time and expires after the user resets the PIN."
-                                size_hint_y: None
-                                font_size: "12sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.15, 0.15, 0.20, 1
-                                text_size: self.width, None
-                            MDLabel:
-                                text: "Formula: SHA256(DEVICE_ID | secret)[:8]"
-                                size_hint_y: None
-                                height: "20dp"
-                                font_size: "10sp"
-                                theme_text_color: "Secondary"
-
-                        MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "200dp"
-                            padding: "14dp"
-                            spacing: "10dp"
-                            radius: [16]
-                            elevation: 2
-                            md_bg_color: 1, 1, 1, 1
-                            MDLabel:
-                                text: "Device ID"
-                                bold: True
-                                font_size: "15sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.08, 0.45, 0.75, 1
-                                size_hint_y: None
-                                height: "24dp"
-                            MDTextField:
-                                id: rec_device_field
-                                mode: "rectangle"
-                                hint_text: "e.g. F08D87722C4B4DC3"
-                                icon_left: "identifier"
-                                font_size: "16sp"
-                                halign: "center"
-                            MDBoxLayout:
-                                orientation: "horizontal"
-                                size_hint_y: None
-                                height: "44dp"
-                                spacing: "8dp"
-                                MDFlatButton:
-                                    text: "Paste"
-                                    on_release: app.paste_rec_device()
-                                MDFlatButton:
-                                    text: "Clear"
-                                    on_release: app.clear_rec_device()
-
-                        MDRaisedButton:
-                            text: "Generate Recovery Code"
-                            md_bg_color: 0.55, 0.27, 0.68, 1
-                            size_hint_y: None
-                            height: "56dp"
-                            pos_hint: {"center_x": 0.5}
-                            on_release: app.generate_recovery()
-
-                        MDCard:
-                            orientation: "vertical"
-                            size_hint_y: None
-                            height: "220dp"
-                            padding: "14dp"
-                            spacing: "10dp"
-                            radius: [16]
-                            elevation: 2
-                            md_bg_color: 1, 1, 1, 1
-                            MDLabel:
-                                text: "Recovery Code (8 characters)"
-                                bold: True
-                                font_size: "15sp"
-                                theme_text_color: "Custom"
-                                text_color: 0.55, 0.27, 0.68, 1
-                                size_hint_y: None
-                                height: "24dp"
-                            MDTextField:
-                                id: rec_code_field
-                                mode: "rectangle"
-                                readonly: True
-                                font_size: "30sp"
-                                bold: True
-                                halign: "center"
-                                size_hint_y: None
-                                height: "80dp"
-                                hint_text: "- - - - - - - -"
-                            MDBoxLayout:
-                                orientation: "horizontal"
-                                size_hint_y: None
-                                height: "52dp"
-                                spacing: "8dp"
-                                MDRaisedButton:
-                                    text: "Copy"
-                                    md_bg_color: 0.15, 0.55, 0.32, 1
-                                    size_hint_x: 0.5
-                                    on_release: app.copy_recovery_code()
-                                MDRaisedButton:
-                                    text: "Share"
-                                    md_bg_color: 0.25, 0.65, 0.85, 1
-                                    size_hint_x: 0.5
-                                    on_release: app.share_recovery_code()
-
-                        Widget:
+                        height: "110dp"
+                        padding: "10dp"
+                        spacing: "4dp"
+                        radius: [12]
+                        elevation: 0
+                        md_bg_color: 0.98, 0.95, 0.88, 1
+                        MDLabel:
+                            text: "What is this code?"
+                            bold: True
+                            font_size: "13sp"
                             size_hint_y: None
                             height: "20dp"
+                            theme_text_color: "Custom"
+                            text_color: 0.75, 0.22, 0.17, 1
+                        MDLabel:
+                            text: "A recovery code lets a customer who forgot their PIN reset it without losing data. Give it only to the verified device owner."
+                            font_size: "11sp"
+                            theme_text_color: "Custom"
+                            text_color: 0.15, 0.15, 0.20, 1
+                            text_size: self.width, None
+                        MDLabel:
+                            text: "SHA256(DEVICE_ID | secret)[:8]"
+                            size_hint_y: None
+                            height: "14dp"
+                            font_size: "9sp"
+                            theme_text_color: "Secondary"
+
+                    # Device ID
+                    MDLabel:
+                        text: "Device ID"
+                        bold: True
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: "20dp"
+                        theme_text_color: "Custom"
+                        text_color: 0.08, 0.45, 0.75, 1
+                    MDTextField:
+                        id: rec_device_field
+                        mode: "rectangle"
+                        hint_text: "e.g. F08D87722C4B4DC3"
+                        font_size: "14sp"
+                        size_hint_y: None
+                        height: "48dp"
+                        halign: "center"
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: "34dp"
+                        spacing: "6dp"
+                        MDFlatButton:
+                            text: "Paste"
+                            font_size: "12sp"
+                            on_release: app.paste_rec_device()
+                        MDFlatButton:
+                            text: "Clear"
+                            font_size: "12sp"
+                            on_release: app.clear_rec_device()
+
+                    # Generate button
+                    MDRaisedButton:
+                        text: "Generate Recovery Code"
+                        md_bg_color: 0.55, 0.27, 0.68, 1
+                        font_size: "14sp"
+                        size_hint_y: None
+                        height: "46dp"
+                        pos_hint: {"center_x": 0.5}
+                        on_release: app.generate_recovery()
+
+                    # Recovery code output
+                    MDLabel:
+                        text: "Recovery Code (8 characters)"
+                        bold: True
+                        font_size: "13sp"
+                        size_hint_y: None
+                        height: "20dp"
+                        theme_text_color: "Custom"
+                        text_color: 0.55, 0.27, 0.68, 1
+                    MDTextField:
+                        id: rec_code_field
+                        mode: "rectangle"
+                        readonly: True
+                        font_size: "28sp"
+                        bold: True
+                        halign: "center"
+                        size_hint_y: None
+                        height: "70dp"
+                        hint_text: "- - - - - - - -"
+
+                    # Copy/Share
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        size_hint_y: None
+                        height: "42dp"
+                        spacing: "6dp"
+                        MDRaisedButton:
+                            text: "Copy"
+                            md_bg_color: 0.15, 0.55, 0.32, 1
+                            font_size: "13sp"
+                            size_hint_x: 0.5
+                            on_release: app.copy_recovery_code()
+                        MDRaisedButton:
+                            text: "Share"
+                            md_bg_color: 0.25, 0.65, 0.85, 1
+                            font_size: "13sp"
+                            size_hint_x: 0.5
+                            on_release: app.share_recovery_code()
+
+                    Widget:
 '''
 
 
